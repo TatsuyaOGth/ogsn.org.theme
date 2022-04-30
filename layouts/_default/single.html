@@ -1,0 +1,15 @@
+{{ define "main" }}
+<div>
+    <h1 class="content-title">
+        {{ .Title }}
+        {{- if .Draft }}<div class="entry-isdraft"><sup>&nbsp;&nbsp;[draft]</sup></div>{{- end }}
+    </h1>
+    {{ if not .PublishDate.IsZero -}}
+    <p>{{ .PublishDate.Format .Site.Params.dateFormat }}</p>
+    {{- end }}
+    <div>
+        {{ .Content }}
+    </div>
+    {{ template "_internal/disqus.html" . }}
+</div>
+{{ end }}

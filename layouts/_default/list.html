@@ -1,0 +1,34 @@
+{{ define "main" }}
+{{ range .Data.Pages }}
+{{ if and (isset .Params "image") .Params.image }}
+{{ if eq .Params.showonlyimage true }}
+<a href="{{ .Permalink }}" title="">
+    {{ else }}
+    <a href="{{ .Permalink }}" title="">
+        {{ end }}
+        <img src="{{ (path.Join .RelPermalink .Params.image) | absURL}}" alt="">
+    </a>
+    {{ end }}
+    {{ if eq .Params.showonlyimage true }}
+    <div>
+        {{ else }}
+        <div>
+            {{ end }}
+            <h4>
+                <a href="{{ .Permalink }}">
+                    {{ .Title }}
+                    {{- if .Draft }}<div><sup>&nbsp;&nbsp;[draft]</sup></div>{{- end }}
+                </a>
+            </h4>
+            <div>
+                <p>
+                    {{ if .Description }}
+                    {{ .Description }}
+                    {{ else }}
+                    {{ .Summary }}...
+                    {{ end }}
+                </p>
+            </div>
+        </div>
+{{ end }}
+{{ end }}
